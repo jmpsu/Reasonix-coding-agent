@@ -1,0 +1,19 @@
+QUICK START FOR BENCHMARK
+
+On your local machine, run this ONE command:
+
+bash <(curl -fsSL https://raw.githubusercontent.com/jmpsu/Reasonix-coding-agent/claude/openwebui-duplicate-audit-h6zx86/benchmark.sh)
+
+OR
+
+Clone and run:
+git clone https://github.com/jmpsu/Reasonix-coding-agent.git
+cd Reasonix-coding-agent
+git checkout claude/openwebui-duplicate-audit-h6zx86
+bash benchmark.sh
+
+REQUIREMENTS:
+- Ollama running on 127.0.0.1:11434
+- vLLM running on 127.0.0.1:18080
+
+That's it. Script handles everything else.
