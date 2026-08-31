@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui-data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ENABLE_AUTO_TOOL_CHOICE=true
+      - TOOL_CALL_PARSER=function_calls
+      - WEBUI_BUILD_VERSION=${WEBUI_BUILD_VERSION:-latest}
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    networks:
+      - webui-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    restart: unless-stopped
+    networks:
+      - webui-network
+
+volumes:
+  open-webui-data:
+  ollama-data:
+
+networks:
+  webui-network:
+    driver: bridge
